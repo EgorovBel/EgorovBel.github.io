@@ -85,24 +85,25 @@ window.onbeforeunload = function () {
     localStorage.setItem('startTime-user2', new Date(localStorage.getItem('startTime-user2')).toISOString());
 }
 </script>
-</head>
-<body>
-<h1>Трезвость</h1>
-<div class="container right">
-<div class="user">
-<h3>Осознанный гражданин</h3>
-<button id="start-btn-user1" class="start-btn top" onclick="startTimer('user1')">Начать жизнь без алкоголя</button>
-<p id="timer-user1">Трезвый 0 часов</p>
-<button id="reset-btn-user1" class="reset-btn disabled" disabled onclick="resetTimer('user1')">Я слаб</button>
-</div>
-</div>
-<div class="container right">
-<div class="user">
-<h3>Господин своей судьбы</h3>
-<button id="start-btn-user2" class="start-btn top" onclick="startTimer('user2')">Начать жизнь без алкоголя</button>
-<p id="timer-user2">Трезвый 0 часов</p>
-<button id="reset-btn-user2" class="reset-btn disabled" disabled onclick="resetTimer('user2')">Я слаб</button>
-</div>
-</div>
-</body>
-</html>
+<head>
+    <title>Счетчик времени с именами</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+      <h1>Трезвость</h1>
+      <div class="container">
+        <div class="user">
+          <h3>Осознанный гражданин</h3>
+          <button id="start-btn-user1" class="start-btn" onclick="startTimer('user1')">Начать жизнь без алкоголя</button>
+          <p id="timer-user1">Трезвый 0 часов</p>
+          <button id="reset-btn-user1" class="reset-btn disabled" disabled onclick="resetTimer('user1')">Я слаб</button>
+        </div>
+        <div class="user">
+          <h3>Господин своей судьбы</h3>
+          <button id="start-btn-user2" class="start-btn" onclick="startTimer('user2')">Начать жизнь без алкоголя</button>
+          <p id="timer-user2">Трезвый 0 часов</p>
+          <button id="reset-btn-user2" class="reset-btn disabled" disabled onclick="resetTimer('user2')">Я слаб</button>
+        </div>
+      </div>
+    </body>
+    </html>
