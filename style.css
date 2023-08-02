@@ -1,0 +1,46 @@
+
+body {
+    background-image: url('pivo.jpg'); 
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    font-size: 48px; /* Измените размер текста на ваше усмотрение */
+    background-image: linear-gradient(to right, #e65100, #ff4081, #d500f9, #651fff, #2962ff, #00b0ff, #00c853);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+div {
+    display: inline-block;
+    margin: 20px;
+    padding: 20px;
+    background-color: #F9DCB8; 
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+p {
+    font-size: 18px;
+    color: #8B6914; 
+    margin: 10px;
+}
+
+button {
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #8B6914; 
+    color: #F2E7CB; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.disabled {
+    background-color: #A9A9A9; 
+    cursor: not-allowed;
+}

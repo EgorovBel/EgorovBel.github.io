@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Счетчик времени с именами</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script>
+function updateTimer(userId) {
+    let startTime = localStorage.getItem(`startTime-${userId}`);
+    let timerInterval;
+
+    if (!startTime) {
+        startTime = new Date().toISOString();
+        localStorage.setItem(`startTime-${userId}`, startTime);
+    } else {
+        const now = new Date();
+        const timeElapsed = now - new Date(startTime);
+
+        let hours = Math.floor(timeElapsed / (1000 * 60 * 60));
+        let minutes = Math.floor((timeElapsed % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((timeElapsed % (1000 * 60)) / 1000);
+
+        hours = hours.toString().padStart(2, '0');
+        minutes = minutes.toString().padStart(2, '0');
+        seconds = seconds.toString().padStart(2, '0');
+
+        const timerElement = document.getElementById(`timer-${userId}`);
+        timerElement.innerText = `${hours}:${minutes}:${seconds}`;
+    }
+
+    const startButton = document.getElementById(`start-btn-${userId}`);
+    const resetButton = document.getElementById(`reset-btn-${userId}`);
+
+    startButton.disabled = true;
+    startButton.classList.add('disabled');
+    resetButton.disabled = false;
+    resetButton.classList.remove('disabled');
+
+    timerInterval = setInterval(() => {
+        const now = new Date();
+        const timeElapsed = now - new Date(startTime);
+
+        let hours = Math.floor(timeElapsed / (1000 * 60 * 60));
+        let minutes = Math.floor((timeElapsed % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((timeElapsed % (1000 * 60)) / 1000);
+
+        hours = hours.toString().padStart(2, '0');
+        minutes = minutes.toString().padStart(2, '0');
+        seconds = seconds.toString().padStart(2, '0');
+
+        const timerElement = document.getElementById(`timer-${userId}`);
+        timerElement.innerText = `${hours}:${minutes}:${seconds}`;
+
+        localStorage.setItem(`startTime-${userId}`, new Date(startTime).toISOString());
+    }, 1000);
+
+    localStorage.setItem(`timerInterval-${userId}`, timerInterval);
+}
+
+function startTimer(userId) {
+    localStorage.removeItem(`startTime-${userId}`);
+    updateTimer(userId);
+}
+
+function resetTimer(userId) {
+    const timerElement = document.getElementById(`timer-${userId}`);
+    const startButton = document.getElementById(`start-btn-${userId}`);
+    const resetButton = document.getElementById(`reset-btn-${userId}`);
+
+    clearInterval(localStorage.getItem(`timerInterval-${userId}`));
+    localStorage.removeItem(`timerInterval-${userId}`);
+    localStorage.removeItem(`startTime-${userId}`);
+
+    startButton.disabled = false;
+    startButton.classList.remove('disabled');
+    resetButton.disabled = true;
+    resetButton.classList.add('disabled');
+
+    timerElement.innerText = "00:00:00";
+}
+
+window.onbeforeunload = function () {
+    clearInterval(localStorage.getItem('timerInterval-user1'));
+    clearInterval(localStorage.getItem('timerInterval-user2'));
+    localStorage.setItem('startTime-user1', new Date(localStorage.getItem('startTime-user1')).toISOString());
+    localStorage.setItem('startTime-user2', new Date(localStorage.getItem('startTime-user2')).toISOString());
+}
+</script>
+</head>
+<body>
+<h1>Трезвость</h1>
+<div class="container right">
+<div class="user">
+<h3>Осознанный гражданин</h3>
+<button id="start-btn-user1" class="start-btn top" onclick="startTimer('user1')">Начать жизнь без алкоголя</button>
+<p id="timer-user1">Трезвый 0 часов</p>
+<button id="reset-btn-user1" class="reset-btn disabled" disabled onclick="resetTimer('user1')">Я слаб</button>
+</div>
+</div>
+<div class="container right">
+<div class="user">
+<h3>Господин своей судьбы</h3>
+<button id="start-btn-user2" class="start-btn top" onclick="startTimer('user2')">Начать жизнь без алкоголя</button>
+<p id="timer-user2">Трезвый 0 часов</p>
+<button id="reset-btn-user2" class="reset-btn disabled" disabled onclick="resetTimer('user2')">Я слаб</button>
+</div>
+</div>
+</body>
+</html>
